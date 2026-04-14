@@ -1,226 +1,168 @@
-# 🤖 Multi-Agent AI System for Automated Report Generation
+# ⬡ NEXUS · Multi-Agent Intelligence Platform
 
-## 🚀 Overview
+> **Enterprise-grade multi-agent research & report generation system**
+> powered by CrewAI, OpenAI, and a premium Streamlit UI.
 
-This project is a **production-ready multi-agent AI system** that automates the process of research, analysis, report writing, and review using multiple collaborating AI agents.
-
-Unlike traditional single LLM-based systems, this solution uses a **multi-agent architecture** where each agent performs a specialized role, resulting in more structured, accurate, and high-quality outputs.
-
----
-
-## 🎯 Problem Statement
-
-Generating structured insights from large or dynamic information sources is time-consuming and requires multiple steps:
-
-* Researching data
-* Analyzing insights
-* Writing reports
-* Reviewing content
-
-Traditional LLMs provide generic responses but lack **structured reasoning and role-based processing**.
-
-👉 This project solves that by automating the entire workflow using **AI agents**.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=flat-square)
+![CrewAI](https://img.shields.io/badge/CrewAI-0.80%2B-purple?style=flat-square)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.35%2B-red?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 ---
 
-## 🧠 Solution
+## Overview
 
-The system is designed as a **multi-agent pipeline** where agents collaborate sequentially:
+NEXUS orchestrates a **4-agent autonomous pipeline** that transforms any research topic into a polished, executive-grade intelligence report — in minutes.
 
-Researcher → Analyst → Writer → Reviewer
+```
+🔭 Researcher  →  📊 Analyst  →  ✍️ Writer  →  ⚖️ Reviewer
+```
 
-Each agent:
-
-* Has a defined role
-* Receives context from previous agents
-* Produces structured output
+Each agent is purpose-built with deep role context, specialized tools, and hand-off prompting for maximum output quality.
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-User Input
-↓
-Research Agent → Analysis Agent → Writer Agent → Reviewer Agent
-↓
-Final Report
-
----
-
-## ⚙️ Tech Stack
-
-### 🧠 Core AI
-
-* CrewAI (Multi-agent orchestration)
-* LangChain (LLM integration)
-
-### 🤖 LLM
-
-* OpenAI API
-
-### 🌐 Tools
-
-* DuckDuckGo Search (real-time data retrieval)
-
-### 🖥️ Frontend
-
-* Streamlit (interactive UI)
-
-### 🧠 Memory
-
-* CrewAI built-in memory
-* Custom memory module
-
-### 📦 Other
-
-* Python
-* dotenv
-* Virtual environment
-
----
-
-## 🔥 Features
-
-### ✅ Multi-Agent Collaboration
-
-Specialized agents handle different stages of the workflow.
-
-### ✅ Context-Aware Processing
-
-Agents communicate using context passing for better reasoning.
-
-### ✅ Real-Time Web Search
-
-Integrated search tool for up-to-date information.
-
-### ✅ Memory Integration
-
-Maintains context across tasks for improved output consistency.
-
-### ✅ Interactive UI
-
-Built using Streamlit for user-friendly interaction.
-
----
-
-## 📂 Project Structure
-
-multi-agent-system/
+```
+enterprise-multi-agent/
+├── app.py                    # Premium Streamlit UI (main entry)
+├── main.py                   # CLI runner with rich output
+├── requirements.txt
+├── .env.example
 │
-├── app.py
-├── main.py
 ├── agents/
-│   ├── researcher.py
-│   ├── analyst.py
-│   ├── writer.py
-│   ├── reviewer.py
+│   ├── researcher.py         # Senior Research Specialist (search + calculator)
+│   ├── analyst.py            # Strategic Intelligence Analyst (calculator)
+│   ├── writer.py             # Principal Technical Writer
+│   └── reviewer.py           # Senior Editorial Director
 │
 ├── tools/
-├── memory/
-├── requirements.txt
-├── README.md
+│   ├── search_tool.py        # DuckDuckGo web search (retry, dedup, structured)
+│   └── calculator_tool.py    # Safe math expression evaluator
+│
+├── config/
+│   └── settings.py           # Pydantic settings with .env support
+│
+├── utils/
+│   ├── helpers.py            # Export (MD/JSON/TXT), metrics, formatting
+│   └── logger.py             # Structured logging
+│
+└── outputs/                  # Auto-generated reports (MD + JSON)
+```
 
 ---
 
-## ▶️ How to Run Locally
+## Agent Pipeline
 
-### 1. Clone the Repository
+| Agent | Role | Tools | Responsibility |
+|-------|------|-------|----------------|
+| 🔭 **Researcher** | Senior Research Specialist | Web Search, Calculator | Multi-source research, data gathering, context building |
+| 📊 **Analyst** | Strategic Intelligence Analyst | Calculator | SWOT analysis, trend identification, risk assessment |
+| ✍️ **Writer** | Principal Technical Writer | — | Structured 7-section report creation |
+| ⚖️ **Reviewer** | Senior Editorial Director | — | Quality assurance, strengthening recommendations, final polish |
+
+---
+
+## Setup
+
+### 1. Clone and install
 
 ```bash
-git clone https://github.com/your-username/multi-agent-system.git
-cd multi-agent-system
-```
-
-### 2. Create Virtual Environment
-
-```bash
+git clone https://github.com/yourname/nexus-multi-agent.git
+cd nexus-multi-agent
 python -m venv venv
-venv\Scripts\activate
-```
-
-### 3. Install Dependencies
-
-```bash
+source venv/bin/activate          # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. Add API Key
+### 2. Configure environment
 
-Create a `.env` file:
-
-```env
-OPENAI_API_KEY=your_api_key_here
+```bash
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY
 ```
 
-### 5. Run the App
+### 3. Run the web UI
 
 ```bash
 streamlit run app.py
 ```
 
----
+### 4. Or use the CLI
 
-## 🧪 Example Use Cases
+```bash
+# Basic
+python main.py --topic "AI trends in 2025"
 
-* AI job market analysis
-* Business trend reports
-* Technology research
-* Market insights generation
+# With GPT-4o
+python main.py --topic "Quantum computing" --model gpt-4o
 
----
-
-## ⚠️ Challenges & Solutions
-
-### 🔴 Tool Compatibility Issue
-
-* Problem: LangChain tools not compatible with CrewAI
-* Solution: Implemented custom tool using BaseTool
-
-### 🔴 API Key Errors
-
-* Problem: Missing environment variables
-* Solution: Used dotenv for secure configuration
-
-### 🔴 Output Formatting
-
-* Problem: Raw JSON output
-* Solution: Extracted clean output using `result.raw`
-
-### 🔴 Environment Issues
-
-* Problem: Python version conflicts
-* Solution: Used Python 3.10 for stability
+# Without memory, no file save
+python main.py --topic "Climate tech" --no-memory --no-save
+```
 
 ---
 
-## 🚀 Future Improvements
+## Features
 
-* Add LangGraph for advanced workflows
-* Integrate vector database (FAISS/Pinecone)
-* Add chat-based UI
-* Enable PDF export
-* Deploy on cloud platforms
+### Premium UI
+- 🎨 Dark luxury aesthetic with animated agent pipeline visualization
+- ⚡ Live agent status (idle → running → done) with glow effects
+- 📊 Report metrics dashboard (word count, reading time, sections, gen. time)
+- 💾 Multi-format export: Markdown, JSON, Plain Text
+- 📂 Session history with quick-access sidebar
+- 💡 Topic presets for one-click research
+- 🔧 Runtime configuration: model, temperature, memory toggle
+
+### Enterprise Backend
+- 🔁 Retry logic with exponential back-off on search failures
+- 🧹 Search result deduplication by URL
+- 🛡️ Safe math evaluator (no `eval()` exploits)
+- 📝 Structured logging across all modules
+- ⚙️ Pydantic settings validation with `.env` support
+- 📁 Auto-save reports as Markdown + JSON to `outputs/`
+- 🏷️ Full metadata in JSON exports (topic, timestamp, metrics, agent trace)
+
+### Report Quality
+- Executive summary with 5-bullet key takeaways
+- 7-section structured format (Background → Findings → Strategy → Risks → Recommendations → Outlook)
+- SWOT analysis framework
+- Specific, measurable recommendations
+- Future Outlook subsection
 
 ---
 
-## 🏆 Key Learnings
+## Configuration
 
-* Multi-agent system design
-* Tool integration in AI workflows
-* Context management and memory
-* Real-world AI deployment
+All settings configurable via `.env` or environment variables:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `OPENAI_API_KEY` | — | **Required.** OpenAI API key |
+| `MODEL_NAME` | `gpt-4o-mini` | LLM model to use |
+| `TEMPERATURE` | `0.3` | Generation temperature (0–1) |
+| `MAX_TOKENS` | `4000` | Max tokens per LLM call |
+| `AGENT_VERBOSE` | `false` | Enable CrewAI verbose logging |
+| `MAX_ITERATIONS` | `10` | Max agent iteration loops |
+| `ENABLE_MEMORY` | `true` | Enable CrewAI shared memory |
+| `MAX_SEARCH_RESULTS` | `6` | Search results per query |
+| `OUTPUT_DIR` | `outputs` | Directory for saved reports |
+| `LOG_LEVEL` | `INFO` | Logging verbosity |
 
 ---
 
-## 👨‍💻 Author
+## Technologies
 
-Ashutosh Suryawanshi
-
-* GitHub: https://github.com/Ashusurya00
-* LinkedIn: https://linkedin.com/in/ashutosh-suryawanshi-26aa46378
+- **[CrewAI](https://crewai.com/)** — Multi-agent orchestration framework
+- **[OpenAI](https://openai.com/)** — LLM backbone (GPT-4o / GPT-4o-mini)
+- **[Streamlit](https://streamlit.io/)** — Web UI framework
+- **[DuckDuckGo Search](https://pypi.org/project/duckduckgo-search/)** — Privacy-first web search
+- **[Pydantic Settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/)** — Configuration management
+- **Google Fonts** — Syne, DM Sans, JetBrains Mono
 
 ---
 
-## ⭐ If you like this project
+## License
 
-Give it a ⭐ on GitHub and connect with me!
+MIT © 2025 NEXUS Intelligence Platform
